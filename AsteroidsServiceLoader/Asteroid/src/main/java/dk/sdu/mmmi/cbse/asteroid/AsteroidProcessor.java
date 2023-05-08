@@ -37,11 +37,11 @@ public class AsteroidProcessor implements IEntityProcessingService {
             movingPart.process(gameData, asteroid);
             positionPart.process(gameData, asteroid);
 
-            // Split event
-            if (lifePart.isHit()) {
-                asteroidSplitter.createSplitAsteroid(asteroid, world);
-            }
-            setShape(asteroid, numPoints);
+                // Split event
+                if (lifePart.isHit()) {
+                    asteroidSplitter.createSplitAsteroid(asteroid, world);
+                }
+                setShape(asteroid, numPoints);
         }
 
     }

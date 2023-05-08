@@ -11,6 +11,7 @@ public class Player extends SpaceObject {
     private boolean right;
     private boolean up;
 
+
     private float maxSpeed;
     private float acceleration;
     private float deceleration;
@@ -22,7 +23,7 @@ public class Player extends SpaceObject {
 
         maxSpeed = 300;
         acceleration = 200;
-        deceleration = 10;
+        deceleration = 40;
 
         shapex = new float[4];
         shapey = new float[4];
@@ -33,8 +34,8 @@ public class Player extends SpaceObject {
     }
 
     private void setShape() {
-        shapex[0] = x + MathUtils.cos(radians) * 8;
-        shapey[0] = y + MathUtils.sin(radians) * 8;
+        shapex[0] = x + MathUtils.cos(radians) * 20;
+        shapey[0] = y + MathUtils.sin(radians) * 20;
 
         shapex[1] = x + MathUtils.cos(radians - 4 * 3.1415f / 5) * 8;
         shapey[1] = y + MathUtils.sin(radians - 4 * 3.1145f / 5) * 8;
@@ -72,6 +73,7 @@ public class Player extends SpaceObject {
             dx += MathUtils.cos(radians) * acceleration * dt;
             dy += MathUtils.sin(radians) * acceleration * dt;
         }
+
 
         // deceleration
         float vec = (float) Math.sqrt(dx * dx + dy * dy);
