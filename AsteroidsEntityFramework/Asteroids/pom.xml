@@ -24,18 +24,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx</artifactId>
-            <version>1.11.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx</artifactId>
-            <version>1.11.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>dk.sdu.mmmi.cbse</groupId>
             <artifactId>CommonAsteroids</artifactId>
             <version>1.0-SNAPSHOT</version>

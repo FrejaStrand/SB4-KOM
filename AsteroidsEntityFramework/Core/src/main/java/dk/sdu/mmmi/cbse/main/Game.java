@@ -23,17 +23,8 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-
-import java.util.ServiceLoader;
-import java.util.Collection;
-
-import dk.sdu.mmmi.cbse.enemysystem.Enemy;
 import dk.sdu.mmmi.cbse.managers.GameInputProcessor;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 public class Game implements ApplicationListener {
 
@@ -41,8 +32,9 @@ public class Game implements ApplicationListener {
     private ShapeRenderer sr;
 
     private final GameData gameData = new GameData();
-    private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
-    private List<IGamePluginService> entityPlugins = new ArrayList<>();
+    private final List<IEntityProcessingService> entityProcessors;
+    private final List<IGamePluginService> entityPlugins;
+    private final List<IPostEntityProcessingService> postEntityProcessors;
     private World world = new World();
 
     /**
@@ -51,7 +43,12 @@ public class Game implements ApplicationListener {
      * @param entityPluginServices The entity plugin services to set.
      * @param postEntityServices The post entity services to set.
      */
-    public Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessingService> entityPluginServices, List<IPostEntityProcessingService> postEntityServices) {}
+    public Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessingService> entityPluginServices, List<IPostEntityProcessingService> postEntityServices) {
+        this.entityPlugins = gamePluginServices;
+        this.entityProcessors = entityPluginServices;
+        this.postEntityProcessors = postEntityServices;
+
+    }
 
     @Override
     public void create() {
@@ -70,7 +67,7 @@ public class Game implements ApplicationListener {
         );
 
         // Lookup all Game Plugins using ServiceLoader
-        for (IGamePluginService iGamePlugin : getPluginServices()) {
+        for (IGamePluginService iGamePlugin : entityPlugins) {
             iGamePlugin.start(gameData, world);
         }
     }
@@ -100,10 +97,10 @@ public class Game implements ApplicationListener {
      */
     private void update() {
         // Update
-        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
+        for (IEntityProcessingService entityProcessorService : entityProcessors) {
             entityProcessorService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
+        for (IPostEntityProcessingService postEntityProcessingService : postEntityProcessors) {
             postEntityProcessingService.process(gameData, world);
 
         }
@@ -114,15 +111,7 @@ public class Game implements ApplicationListener {
      */
     private void draw() {
         for (Entity entity : world.getEntities()) {
-            if (entity instanceof Enemy) {
-                sr.setColor(0, 1, 0, 0);
-            } else if (entity instanceof Asteroids) {
-                sr.setColor(164 / 255F, 87 / 255F, 41 / 255F, 1);
-            } else if (entity instanceof Bullet) {
-                sr.setColor(1, 215 / 225F, 0, 1);
-            } else {
-                sr.setColor(1, 1, 1, 1);
-            }
+            sr.setColor(1, 1, 1, 1);
 
             sr.begin(ShapeRenderer.ShapeType.Line);
 
@@ -155,11 +144,11 @@ public class Game implements ApplicationListener {
     @Override
     public void dispose() {
     }
-
+/*
     /**
      * This method is responsible for getting all the game plugins.
      * @return A collection of game plugins.
-     */
+     *
     private Collection<? extends IGamePluginService> getPluginServices() {
         return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
@@ -167,17 +156,19 @@ public class Game implements ApplicationListener {
     /**
      * This method is responsible for getting all the entity processing services.
      * @return A collection of entity processing services.
-     */
+     *
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
         return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
+
     /**
      * This method is responsible for getting all the post entity processing services.
      * @return A collection of post entity processing services.
-     */
+     *
     private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
+    */
 }
