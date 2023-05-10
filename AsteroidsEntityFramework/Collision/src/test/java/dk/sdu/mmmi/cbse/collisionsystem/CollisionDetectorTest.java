@@ -1,16 +1,12 @@
-/**
- * This test class is used to test the CollisionDetector class.
- */
 package dk.sdu.mmmi.cbse.collisionsystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CollisionDetectionTest {
-
+public class CollisionDetectorTest {
     /**
      * Test of collides method, of class CollisionDetection.
      * It is done by creating two entities with the same position and radius.
@@ -18,7 +14,7 @@ class CollisionDetectionTest {
      * The expected result should true, because the two entities are colliding.
      */
     @Test
-    void collisiontrue() {
+    public void collisiontrue() {
         Entity entity1 = new Entity();
         Entity entity2 = new Entity();
         entity1.setRadius(15);
@@ -37,7 +33,7 @@ class CollisionDetectionTest {
      * The expected result should be false, because the two entities are not colliding.
      */
     @Test
-    void collisionfalse() {
+    public void collisionfalse() {
         Entity entity1 = new Entity();
         Entity entity2 = new Entity();
         entity1.setRadius(10);

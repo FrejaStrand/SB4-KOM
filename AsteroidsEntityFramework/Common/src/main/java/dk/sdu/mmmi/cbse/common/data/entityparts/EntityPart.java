@@ -12,5 +12,12 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
  * @author Alexander
  */
 public interface EntityPart {
+    /**
+     * This method is responsible for processing the entity.
+     * Pre-condition: The entity must exist and the game state must exist.
+     * Post-condition: The entity is processed.
+     * @param gameData The current game state.
+     * @param entity The entity to be processed.
+     */
     void process(GameData gameData, Entity entity);
 }

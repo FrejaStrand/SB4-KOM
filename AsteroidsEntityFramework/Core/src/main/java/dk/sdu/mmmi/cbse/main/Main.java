@@ -10,7 +10,7 @@ public class Main {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ModuleConfiguration.class);
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("Asteroids");
-		config.setWindowSizeLimits(1000,600,1000,600);
+		config.setWindowSizeLimits(800, 600, 800, 600 );
 
 		new Lwjgl3Application(context.getBean(Game.class), config);
 	}

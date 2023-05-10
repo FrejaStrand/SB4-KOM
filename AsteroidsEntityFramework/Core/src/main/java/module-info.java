@@ -1,4 +1,5 @@
 module Core {
+    opens dk.sdu.mmmi.cbse.main;
     requires Common;
     requires CommonBullet;
     requires CommonAsteroids;
